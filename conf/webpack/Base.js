@@ -173,10 +173,10 @@ class WebpackBaseConfig {
           this.srcPathAbsolute,
           'node_modules'
         ]
-      },
-      postcss: function () {
-        return [];
       }
+      //postcss: function () {
+      //  return [];
+      //}
     };
   }
 }
