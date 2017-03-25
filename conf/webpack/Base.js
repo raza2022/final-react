@@ -54,12 +54,27 @@ class WebpackBaseConfig {
           },
           {
             test: /^.((?!cssmodule).)*\.css$/,
-            loaders: [
-              { loader: 'style-loader' },
-              { loader: 'css-loader' },
-              { loader: 'postcss-loader' }
+            use: [
+              "style-loader",
+              {
+                loader: "css-loader",
+                options: {
+                  modules: true,
+                  sourceMap: true,
+                  importLoaders: 1,
+                  localIdentName: "[name]--[local]--[hash:base64:5]"
+                }
+              },
+              "postcss-loader" // has separate config, see postcss.config.js nearby
             ]
           },
+          //{
+          //  test: /^.((?!cssmodule).)*\.css$/,
+          //  loaders: [
+          //    { loader: 'style-loader'},
+          //    { loader: 'css-loader', options: cssModulesQuery},
+          //  ]
+          //},
           {
             test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2)$/,
             loader: 'file-loader'
@@ -82,15 +97,15 @@ class WebpackBaseConfig {
               { loader: 'less-loader' }
             ]
           },
-          {
-            test: /^.((?!cssmodule).)*\.styl$/,
-            loaders: [
-              { loader: 'style-loader' },
-              { loader: 'css-loader' },
-              { loader: 'postcss-loader' },
-              { loader: 'stylus-loader' }
-            ]
-          },
+        //  {
+        //    test: /^.((?!cssmodule).)*\.styl$/,
+        //    loaders: [
+        //      { loader: 'style-loader' },
+        //      { loader: 'css-loader' },
+        //      { loader: 'postcss-loader' },
+        //      { loader: 'stylus-loader' }
+        //    ]
+        //  },
           {
             test: /\.json$/,
             loader: 'json-loader'
